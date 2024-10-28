@@ -67,26 +67,3 @@ books_data = pd.read_parquet('https://github.com/FranciscoFoz/7_Days_of_Code_Alu
 books_data.value_counts()
 
 complete_data = all_loan_data.merge(books_data)
-
-# # --- Analisar dados ---
-# books_data_copy = books_data.copy()
-
-# duplicados_id_exemplar = books_data_copy['id_exemplar'].value_counts() > 1
-# livros_duplicados = duplicados_id_exemplar[duplicados_id_exemplar == True]
-
-# itens_duplicados = pd.merge(livros_duplicados, books_data_copy, on='id_exemplar')
-
-# itens_duplicados_filtrados = itens_duplicados[itens_duplicados.duplicated(subset=['id_exemplar'], keep=False)]
-
-# # --- Criar filtro para remoção ---
-# # 1. Marcar linhas com 'codigo_barras' contendo ":" em 'itens_duplicados_filtrados'
-# itens_duplicados_filtrados['remover'] = itens_duplicados_filtrados['codigo_barras'].str.contains("/", case=True)
-# # 2. Filtrar as linhas a serem removidas
-# linhas_para_remover = itens_duplicados_filtrados[itens_duplicados_filtrados['remover'] == True]
-# # 3. Obter os índices das linhas a serem removidas no DataFrame ORIGINAL ('books_data_copy')
-# indices_para_remover = books_data_copy[books_data_copy['id_exemplar'].isin(linhas_para_remover['id_exemplar'])].index
-
-# # --- Remover as linhas ---
-# books_data_ok = books_data_copy.drop(index=indices_para_remover, inplace=True) 
-
-# view = books_data_copy[books_data_copy['id_exemplar'] == 206184]

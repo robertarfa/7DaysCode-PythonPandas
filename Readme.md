@@ -8,4 +8,5 @@
   - Apresentação do conjunto de dados: contexto, fonte, o que ele representa.
   - Carregamento do dataset utilizando Pandas (`pd.read_csv()`).
   - Exploração inicial: primeiras linhas (`df.head()`), informações gerais (`df.info()`), estatísticas descritivas (`df.describe()`).
-  - Limpeza básica: verificar se há dados faltantes (`df.isnull().sum()`) e decidir como lidar com eles (excluir linhas/colunas ou preencher).
+  - Limpeza básica: verificar se existem dados duplicados, verificar se há dados faltantes (`df.isnull().sum()`) e decidir como lidar com eles (excluir linhas/colunas ou preencher).
+  - Bases: mesclar as diferentes bases.

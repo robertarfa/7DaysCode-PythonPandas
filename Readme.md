@@ -1,6 +1,6 @@
 ## Desafio #7DaysOfCode - Pandas
 
-PS: Readme desenvolvido com GenIA fazendo a leitura do arquivo do código.
+PS: Readme desenvolvido com GenIA fazendo a leitura do arquivo do código utilizando a biblioteca LangChain.
 
 **Dia 1: Conhecendo os Dados e Manipulação Básica**
 

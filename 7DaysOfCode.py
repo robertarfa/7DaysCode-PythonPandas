@@ -4,6 +4,7 @@ import pandas as pd
 # Em quais bibliotecas do sistema estão a maior quantidade de empréstimos?
 # Quais são os temas mais emprestados? E os menos?
 
+######DIA 1######
 #Importar dados
 dados_2010_1 = pd.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20101.csv?raw=true')
 dados_2010_2 = pd.read_csv('https://github.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/blob/main/Dia_1-Importando_dados/Datasets/dados_emprestimos/emprestimos-20102.csv?raw=true')
@@ -67,3 +68,106 @@ books_data = pd.read_parquet('https://github.com/FranciscoFoz/7_Days_of_Code_Alu
 books_data.value_counts()
 
 complete_data = all_loan_data.merge(books_data)
+
+######DIA 2######
+CDU_lista = []
+for location in complete_data['localizacao']:
+  match location:
+    case n if 0 <= n <= 99:
+      CDU_lista.append("Generalidades. Ciência e conhecimento")
+    case n if 100 <= n <= 199:
+      CDU_lista.append("Filosofia e psicologia")
+    case n if 200 <= n <= 299:
+      CDU_lista.append("Religião")
+    case n if 300 <= n <= 399:
+      CDU_lista.append("Ciências sociais")
+    case n if 400 <= n <= 499:
+      CDU_lista.append("Classe vaga. Provisoriamente não ocupada")
+    case n if 500 <= n <= 599:
+      CDU_lista.append("Matemática e ciências naturais")
+    case n if 600 <= n <= 699:
+      CDU_lista.append("Ciências aplicadas")
+    case n if 700 <= n <= 799:
+      CDU_lista.append("Belas artes")
+    case n if 800 <= n <= 899:
+      CDU_lista.append("Linguagem. Língua. Linguística")
+    case n if 900 <= n <= 999:
+      CDU_lista.append("Geografia. Biografia. História")
+    case _: # Caso nenhum dos casos acima seja correspondido
+      CDU_lista.append("Classificação CDU não encontrada")
+
+complete_data['CDU_classification'] = CDU_lista
+
+#excluir coluna registro_sistema
+complete_data.drop(columns=['registro_sistema'],inplace=True)
+
+#Transformar-a coluna matricula_ou_siape está como floeat, tranformar String
+complete_data.info()
+complete_data['matricula_ou_siape'] = complete_data['matricula_ou_siape'].astype('string')
+
+######DIA 3######
+complete_data.head()
+
+complete_data.isna().sum()
+
+# verifique qual é a quantidade total de exemplares emprestados por 
+#cada ano e plote um gráfico de linhas.
+
+data_emprestimo = pd.Series(complete_data['data_emprestimo'])
+complete_data['data_emprestimo'] = pd.to_datetime(data_emprestimo)
+
+complete_data['data_renovacao'] = pd.to_datetime(complete_data['data_renovacao'])
+complete_data['data_devolucao'] = pd.to_datetime(complete_data['data_devolucao'])
+
+complete_data.head()
+
+complete_data['data_emprestimo'].dt.year
+
+len(complete_data['id_exemplar'])
+
+emprestimos_data = pd.DataFrame(complete_data['data_emprestimo'].value_counts()).reset_index()
+emprestimos_data.columns = ['data','quantidade']
+emprestimos_data['data'] = pd.to_datetime(emprestimos_data['data'])
+emprestimos_data
+
+emprestimos_por_ano = emprestimos_data.groupby(by=emprestimos_data.data.dt.year)['quantidade'].sum()
+emprestimos_por_ano.index.name = 'ano'
+emprestimos_por_ano
+
+import seaborn as sns
+import matplotlib.ticker as ticker
+import matplotlib.pyplot as plt
+
+emprestimos_por_ano_df = emprestimos_por_ano.reset_index()
+
+
+ax = sns.lineplot(data=emprestimos_por_ano_df,x='ano',y='quantidade', linewidth=3, color='green')
+ax.set_title('Número de Empréstimos por Ano')
+ax.set(xlabel="Ano",ylabel="Número de Empréstimos")
+ax.tick_params(axis='x', rotation=45)
+plt.show()
+
+#gere uma tabela com a quantidade total de exemplares emprestados por mês
+#férias em janeiro, dezembro e julho
+emprestimos_por_mes = emprestimos_data.groupby(by=emprestimos_data.data.dt.month)['quantidade'].sum()
+emprestimos_por_mes.index.name = 'mes'
+emprestimos_por_mes_df = emprestimos_por_mes.reset_index()
+
+ax = sns.lineplot(data=emprestimos_por_mes_df,x='mes',y='quantidade', linewidth=3, color='red')
+ax.set_title('Número de Empréstimos por Mês')
+ax.set(xlabel="Mês",ylabel="Número de Empréstimos")
+ax.tick_params(axis='x', rotation=45)
+ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+plt.show()
+
+emprestimos_por_hora = emprestimos_data.groupby(by=emprestimos_data.data.dt.hour)['quantidade'].sum()
+emprestimos_por_hora.index.name = 'horas'
+emprestimos_por_hora_df = emprestimos_por_hora.reset_index()
+emprestimos_por_hora_df
+
+ax = sns.barplot(data=emprestimos_por_hora_df,x='horas',y='quantidade', linewidth=3, color='blue')
+ax.set_title('Número de Empréstimos por Hora')
+ax.set(xlabel="Hora",ylabel="Número de Empréstimos")
+ax.tick_params(axis='x', rotation=45)
+ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+plt.show()

@@ -30,7 +30,10 @@
 - **Descrição:**
   - Tratamento de dados: O código começa convertendo as colunas `data_emprestimo`, `data_renovacao` e `data_devolucao` do tipo string para o tipo datetime.
   - Análise de empréstimos por ano: O código calcula a quantidade total de empréstimos por ano e armazena os resultados em um DataFrame chamado `emprestimos_por_ano_df`. Em seguida, gera um gráfico de linha para visualizar os resultados.
+    ![alt text](image-1.png)
   - Análise de empréstimos por mês: O código calcula a quantidade total de empréstimos por mês e armazena os resultados em um DataFrame chamado `emprestimos_por_mes_df`. Em seguida, gera um gráfico de linha para visualizar os resultados.
+    ![alt text](image-2.png)
   - Análise de empréstimos por hora: O código calcula a quantidade total de empréstimos por hora e armazena os resultados em um DataFrame chamado `emprestimos_por_hora_df`. Em seguida, gera um gráfico de barras para visualizar os resultados.
+    ![alt text](image-3.png)
 
 O objetivo do código é analisar a frequência de empréstimos ao longo do tempo e identificar tendências e padrões nos dados.

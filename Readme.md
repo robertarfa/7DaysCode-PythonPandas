@@ -14,7 +14,7 @@ PS: Readme desenvolvido com GenIA fazendo a leitura do arquivo do código.
   - Limpeza básica: verificar se existem dados duplicados, verificar se há dados faltantes (`df.isnull().sum()`) e decidir como lidar com eles (excluir linhas/colunas ou preencher).
   - Bases: mesclar as diferentes bases.
 
-  **Dia 2: Limpeza e Transformação de Dados**
+**Dia 2: Limpeza e Transformação de Dados**
 
 - **Título:** Dia 2 - Limpeza e Transformação de Dados com Pandas
 - **Descrição:**

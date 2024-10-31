@@ -171,3 +171,80 @@ ax.set(xlabel="Hora",ylabel="Número de Empréstimos")
 ax.tick_params(axis='x', rotation=45)
 ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
 plt.show()
+
+######DIA 4######
+
+def analise_frequencia(variavel):
+  '''
+  Esta função irá gerar uma tabela de frequência com percentuais de acordo 
+  com a variável passada, além de um gráfico de barras.
+
+  variavel = variável categórica escolhida de dentro do conjunto de dados 
+  complete_data
+  '''
+
+  dataframe = pd.DataFrame(complete_data[variavel].value_counts())                      
+  dataframe.columns = ['quantidade']
+  dataframe['percentual'] = round((dataframe.quantidade / dataframe.quantidade.sum())*100,1)
+  dataframe = dataframe.reset_index() # Aqui você precisa atribuir o resultado de reset_index()
+  
+  ax = sns.barplot(y=dataframe[variavel], x=dataframe['percentual'])
+  plt.xlabel(variavel) # Adicione rótulo ao eixo X
+  plt.ylabel('Percentual') # Adicione rótulo ao eixo Y
+  plt.title('Frequência de {} em Porcentagem'.format(variavel)) # Adicione título ao gráfico
+  plt.xticks(rotation=45, ha='right') # Ajuste o layout dos rótulos do eixo X
+
+  plt.show()
+
+  return dataframe
+
+#Como se distribuem os empréstimos de exemplares 
+#pelos tipos de vínculo dos usuários
+
+analise_frequencia('tipo_vinculo_usuario')
+
+#Quais coleções são mais emprestadas?
+
+analise_frequencia('colecao')
+
+# Quais são as bibliotecas com mais ou menos quantidade de empréstimos?
+analise_frequencia('biblioteca')
+
+#De quais temas da CDU são os exemplares emprestados?
+analise_frequencia('CDU_classification')
+
+#Quanto tempo os livros ficam emprestados
+complete_data['tempo_emprestimo'] = complete_data['data_devolucao']-complete_data['data_emprestimo']
+
+def analise_media_frequencia(variavel):
+  '''
+  Esta função irá gerar uma tabela de frequência com percentuais de acordo 
+  com a variável passada, além de um gráfico de barras.
+
+  variavel = variável categórica escolhida de dentro do conjunto de dados 
+  complete_data
+  '''
+
+  dataframe = pd.DataFrame(complete_data[variavel].value_counts())                      
+  dataframe.columns = ['quantidade']
+  dataframe['media'] = complete_data.groupby(variavel)['tempo_emprestimo'].mean().sort_values(ascending=False)
+  dataframe = dataframe.reset_index() # Aqui você precisa atribuir o resultado de reset_index()
+  
+  # Inverter o eixo y:
+  ax = sns.barplot(x=dataframe[variavel], y=dataframe['media'])
+  plt.xlabel('Média de dias de empréstimo') # Adicione rótulo ao eixo X
+  plt.ylabel('') # Adicione rótulo ao eixo Y
+  plt.title('Média de dias de empréstimo por {}'.format(variavel)) # Adicione título ao gráfico
+  plt.xticks(rotation=45, ha='right') # Ajuste o layout dos rótulos do eixo X
+  # Inverter o eixo Y:
+  plt.gca().invert_yaxis() 
+  plt.show()
+
+  return dataframe
+
+analise_media_frequencia('biblioteca')
+analise_media_frequencia('tipo_vinculo_usuario')
+
+complete_data.info()
+
+

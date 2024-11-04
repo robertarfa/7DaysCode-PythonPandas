@@ -58,3 +58,30 @@ Os resultados mostram que:
 - As coleções mais emprestadas são as de literatura e ciências exatas.
 - As bibliotecas com mais empréstimos são a Biblioteca Central e a Biblioteca de Ciências.
 - Os temas mais emprestados são os de ciências exatas e literatura.
+
+**DIA 5: Análise para entender como os empréstimos de exemplares se distribuíram ao longo dos anos, especificamente para os alunos de graduação e pós-graduação**
+
+**Descrição:**
+
+Neste dia utilizamos a coleção que teve a maior frequência de empréstimos, que foi o "Acervo Circulante", e criamos dois recortes de dados:
+
+1. Alunos de graduação:
+
+- Você filtrou os dados para incluir apenas os alunos de graduação que emprestaram exemplares da coleção "Acervo Circulante".
+- Você criou uma nova coluna "ano" e "mes" a partir da coluna "data_emprestimo".
+- Você calculou a quantidade de empréstimos por ano e mês.
+- Você gerou um gráfico de boxplot para visualizar a distribuição dos empréstimos mensais ao longo dos anos.
+
+2. Alunos de pós-graduação:
+
+- Você seguiu os mesmos passos que para os alunos de graduação, mas filtrando os dados para incluir apenas os alunos de pós-graduação.
+
+Os gráficos de boxplot gerados mostram a distribuição dos empréstimos mensais ao longo dos anos para cada grupo de alunos. Esses gráficos podem ajudar a identificar padrões e tendências nos empréstimos de exemplares ao longo do tempo.
+
+Algumas perguntas que podemos responder com essa análise incluem:
+
+- Qual é a distribuição dos empréstimos mensais ao longo dos anos para os alunos de graduação e pós-graduação?
+- Quais são os anos com mais empréstimos para cada grupo de alunos?
+- Existem padrões ou tendências nos empréstimos de exemplares ao longo do tempo?
+
+Essa análise pode ser útil para entender como os alunos de graduação e pós-graduação utilizam a biblioteca e para identificar oportunidades para melhorar os serviços da biblioteca.

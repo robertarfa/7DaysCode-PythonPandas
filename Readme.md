@@ -85,3 +85,31 @@ Algumas perguntas que podemos responder com essa análise incluem:
 - Existem padrões ou tendências nos empréstimos de exemplares ao longo do tempo?
 
 Essa análise pode ser útil para entender como os alunos de graduação e pós-graduação utilizam a biblioteca e para identificar oportunidades para melhorar os serviços da biblioteca.
+
+**Dia 6: Novos dados, novas análises**
+
+**Objetivos**
+
+- Integrar novos dados sobre os cursos de graduação dos usuários
+- Analisar a quantidade de empréstimos realizados por cada curso de graduação entre 2015 e 2020
+
+**Dados utilizados**
+
+- `matricula_alunos.xlsx`: arquivo Excel com informações sobre os alunos de graduação
+- `cadastro_alunos.json`: arquivo JSON com informações sobre os alunos de graduação
+- `complete_data`: conjunto de dados com informações sobre os empréstimos realizados
+
+**Análises realizadas**
+
+- Integrar os dados de `matricula_alunos.xlsx` e `cadastro_alunos.json` em um único conjunto de dados
+- Filtrar os dados para incluir apenas os alunos de graduação que realizaram empréstimos entre 2015 e 2020
+- Analisar a quantidade de empréstimos realizados por cada curso de graduação
+- Criar uma tabela pivot para visualizar os resultados
+
+**Código utilizado**
+
+- `pd.read_excel()` e `pd.read_json()` para carregar os dados
+- `pd.concat()` para integrar os dados
+  ...
+- Criar visualizações para apresentar os resultados de forma clara e eficaz
+- Integrar os resultados com outras análises para obter uma visão mais completa dos dados.

@@ -141,62 +141,62 @@ import matplotlib.pyplot as plt
 emprestimos_por_ano_df = emprestimos_por_ano.reset_index()
 
 
-ax = sns.lineplot(data=emprestimos_por_ano_df,x='ano',y='quantidade', linewidth=3, color='green')
-ax.set_title('Número de Empréstimos por Ano')
-ax.set(xlabel="Ano",ylabel="Número de Empréstimos")
-ax.tick_params(axis='x', rotation=45)
-plt.show()
+# ax = sns.lineplot(data=emprestimos_por_ano_df,x='ano',y='quantidade', linewidth=3, color='green')
+# ax.set_title('Número de Empréstimos por Ano')
+# ax.set(xlabel="Ano",ylabel="Número de Empréstimos")
+# ax.tick_params(axis='x', rotation=45)
+# plt.show()
 
 #gere uma tabela com a quantidade total de exemplares emprestados por mês
 #férias em janeiro, dezembro e julho
-emprestimos_por_mes = emprestimos_data.groupby(by=emprestimos_data.data.dt.month)['quantidade'].sum()
-emprestimos_por_mes.index.name = 'mes'
-emprestimos_por_mes_df = emprestimos_por_mes.reset_index()
+# emprestimos_por_mes = emprestimos_data.groupby(by=emprestimos_data.data.dt.month)['quantidade'].sum()
+# emprestimos_por_mes.index.name = 'mes'
+# emprestimos_por_mes_df = emprestimos_por_mes.reset_index()
 
-ax = sns.lineplot(data=emprestimos_por_mes_df,x='mes',y='quantidade', linewidth=3, color='red')
-ax.set_title('Número de Empréstimos por Mês')
-ax.set(xlabel="Mês",ylabel="Número de Empréstimos")
-ax.tick_params(axis='x', rotation=45)
-ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-plt.show()
+# ax = sns.lineplot(data=emprestimos_por_mes_df,x='mes',y='quantidade', linewidth=3, color='red')
+# ax.set_title('Número de Empréstimos por Mês')
+# ax.set(xlabel="Mês",ylabel="Número de Empréstimos")
+# ax.tick_params(axis='x', rotation=45)
+# ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+# plt.show()
 
-emprestimos_por_hora = emprestimos_data.groupby(by=emprestimos_data.data.dt.hour)['quantidade'].sum()
-emprestimos_por_hora.index.name = 'horas'
-emprestimos_por_hora_df = emprestimos_por_hora.reset_index()
+# emprestimos_por_hora = emprestimos_data.groupby(by=emprestimos_data.data.dt.hour)['quantidade'].sum()
+# emprestimos_por_hora.index.name = 'horas'
+# emprestimos_por_hora_df = emprestimos_por_hora.reset_index()
 # emprestimos_por_hora_df
 
-ax = sns.barplot(data=emprestimos_por_hora_df,x='horas',y='quantidade', linewidth=3, color='blue')
-ax.set_title('Número de Empréstimos por Hora')
-ax.set(xlabel="Hora",ylabel="Número de Empréstimos")
-ax.tick_params(axis='x', rotation=45)
-ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-plt.show()
+# ax = sns.barplot(data=emprestimos_por_hora_df,x='horas',y='quantidade', linewidth=3, color='blue')
+# ax.set_title('Número de Empréstimos por Hora')
+# ax.set(xlabel="Hora",ylabel="Número de Empréstimos")
+# ax.tick_params(axis='x', rotation=45)
+# ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+# plt.show()
 
 ######DIA 4######
 
-def analise_frequencia(variavel):
-  '''
-  Esta função irá gerar uma tabela de frequência com percentuais de acordo 
-  com a variável passada, além de um gráfico de barras.
+# def analise_frequencia(variavel):
+#   '''
+#   Esta função irá gerar uma tabela de frequência com percentuais de acordo 
+#   com a variável passada, além de um gráfico de barras.
 
-  variavel = variável categórica escolhida de dentro do conjunto de dados 
-  complete_data
-  '''
+#   variavel = variável categórica escolhida de dentro do conjunto de dados 
+#   complete_data
+#   '''
 
-  dataframe = pd.DataFrame(complete_data[variavel].value_counts())                      
-  dataframe.columns = ['quantidade']
-  dataframe['percentual'] = round((dataframe.quantidade / dataframe.quantidade.sum())*100,1)
-  dataframe = dataframe.reset_index() # Aqui você precisa atribuir o resultado de reset_index()
+#   dataframe = pd.DataFrame(complete_data[variavel].value_counts())                      
+#   dataframe.columns = ['quantidade']
+#   dataframe['percentual'] = round((dataframe.quantidade / dataframe.quantidade.sum())*100,1)
+#   dataframe = dataframe.reset_index() # Aqui você precisa atribuir o resultado de reset_index()
   
-  ax = sns.barplot(y=dataframe[variavel], x=dataframe['percentual'])
-  plt.xlabel(variavel) # Adicione rótulo ao eixo X
-  plt.ylabel('Percentual') # Adicione rótulo ao eixo Y
-  plt.title('Frequência de {} em Porcentagem'.format(variavel)) # Adicione título ao gráfico
-  plt.xticks(rotation=45, ha='right') # Ajuste o layout dos rótulos do eixo X
+#   ax = sns.barplot(y=dataframe[variavel], x=dataframe['percentual'])
+#   plt.xlabel(variavel) # Adicione rótulo ao eixo X
+#   plt.ylabel('Percentual') # Adicione rótulo ao eixo Y
+#   plt.title('Frequência de {} em Porcentagem'.format(variavel)) # Adicione título ao gráfico
+#   plt.xticks(rotation=45, ha='right') # Ajuste o layout dos rótulos do eixo X
 
-  plt.show()
+#   plt.show()
 
-  return dataframe
+#   return dataframe
 
 #Como se distribuem os empréstimos de exemplares 
 #pelos tipos de vínculo dos usuários
@@ -216,31 +216,31 @@ def analise_frequencia(variavel):
 #Quanto tempo os livros ficam emprestados
 complete_data['tempo_emprestimo'] = complete_data['data_devolucao']-complete_data['data_emprestimo']
 
-def analise_media_frequencia(variavel):
-  '''
-  Esta função irá gerar uma tabela de frequência com percentuais de acordo 
-  com a variável passada, além de um gráfico de barras.
+# def analise_media_frequencia(variavel):
+#   '''
+#   Esta função irá gerar uma tabela de frequência com percentuais de acordo 
+#   com a variável passada, além de um gráfico de barras.
 
-  variavel = variável categórica escolhida de dentro do conjunto de dados 
-  complete_data
-  '''
+#   variavel = variável categórica escolhida de dentro do conjunto de dados 
+#   complete_data
+#   '''
 
-  dataframe = pd.DataFrame(complete_data[variavel].value_counts())                      
-  dataframe.columns = ['quantidade']
-  dataframe['media'] = complete_data.groupby(variavel)['tempo_emprestimo'].mean().sort_values(ascending=False)
-  dataframe = dataframe.reset_index() # Aqui você precisa atribuir o resultado de reset_index()
+#   dataframe = pd.DataFrame(complete_data[variavel].value_counts())                      
+#   dataframe.columns = ['quantidade']
+#   dataframe['media'] = complete_data.groupby(variavel)['tempo_emprestimo'].mean().sort_values(ascending=False)
+#   dataframe = dataframe.reset_index() # Aqui você precisa atribuir o resultado de reset_index()
   
-  # Inverter o eixo y:
-  ax = sns.barplot(x=dataframe[variavel], y=dataframe['media'])
-  plt.xlabel('Média de dias de empréstimo') # Adicione rótulo ao eixo X
-  plt.ylabel('') # Adicione rótulo ao eixo Y
-  plt.title('Média de dias de empréstimo por {}'.format(variavel)) # Adicione título ao gráfico
-  plt.xticks(rotation=45, ha='right') # Ajuste o layout dos rótulos do eixo X
-  # Inverter o eixo Y:
-  plt.gca().invert_yaxis() 
-  plt.show()
+#   # Inverter o eixo y:
+#   ax = sns.barplot(x=dataframe[variavel], y=dataframe['media'])
+#   plt.xlabel('Média de dias de empréstimo') # Adicione rótulo ao eixo X
+#   plt.ylabel('') # Adicione rótulo ao eixo Y
+#   plt.title('Média de dias de empréstimo por {}'.format(variavel)) # Adicione título ao gráfico
+#   plt.xticks(rotation=45, ha='right') # Ajuste o layout dos rótulos do eixo X
+#   # Inverter o eixo Y:
+#   plt.gca().invert_yaxis() 
+#   plt.show()
 
-  return dataframe
+#   return dataframe
 
 # analise_media_frequencia('biblioteca')
 # analise_media_frequencia('tipo_vinculo_usuario')
@@ -254,62 +254,138 @@ def analise_media_frequencia(variavel):
 # alunos de graduação e pós graduação a distribuição de empréstimos mensais por ano realizados 
 #entre 2010 e 2020 da coleção que tiver a maior frequência de empréstimos.
 
-complete_data.head()
+# complete_data.head()
 
 ##Graduação
-alunos_graduacao = complete_data.query('tipo_vinculo_usuario == "ALUNO DE GRADUAÇÃO"')
-alunos_graduacao.colecao.value_counts()
+# alunos_graduacao = complete_data.query('tipo_vinculo_usuario == "ALUNO DE GRADUAÇÃO"')
+# alunos_graduacao.colecao.value_counts()
 
-alunos_graduacao_acervo_circulante = alunos_graduacao.query('colecao == "Acervo Circulante"')
-alunos_graduacao_acervo_circulante = pd.DataFrame(alunos_graduacao_acervo_circulante)
-alunos_graduacao_acervo_circulante['data_emprestimo'] = pd.to_datetime(alunos_graduacao_acervo_circulante['data_emprestimo'])
-alunos_graduacao_acervo_circulante['ano'] = alunos_graduacao_acervo_circulante['data_emprestimo'].dt.year
-alunos_graduacao_acervo_circulante['mes'] = alunos_graduacao_acervo_circulante['data_emprestimo'].dt.month
-alunos_graduacao_acervo_circulante = alunos_graduacao_acervo_circulante.loc[:,['ano','mes']]
-alunos_graduacao_acervo_circulante = alunos_graduacao_acervo_circulante.value_counts().to_frame('quantidade').reset_index()
+# alunos_graduacao_acervo_circulante = alunos_graduacao.query('colecao == "Acervo Circulante"')
+# alunos_graduacao_acervo_circulante = pd.DataFrame(alunos_graduacao_acervo_circulante)
+# alunos_graduacao_acervo_circulante['data_emprestimo'] = pd.to_datetime(alunos_graduacao_acervo_circulante['data_emprestimo'])
+# alunos_graduacao_acervo_circulante['ano'] = alunos_graduacao_acervo_circulante['data_emprestimo'].dt.year
+# alunos_graduacao_acervo_circulante['mes'] = alunos_graduacao_acervo_circulante['data_emprestimo'].dt.month
+# alunos_graduacao_acervo_circulante = alunos_graduacao_acervo_circulante.loc[:,['ano','mes']]
+# alunos_graduacao_acervo_circulante = alunos_graduacao_acervo_circulante.value_counts().to_frame('quantidade').reset_index()
 
-def gera_box_plot(dataset,x,y,titulo,subtitulo):
-  '''
-  Esta função irá gerar um gráfico de boxplot.
+# def gera_box_plot(dataset,x,y,titulo,subtitulo):
+#   '''
+#   Esta função irá gerar um gráfico de boxplot.
 
-  Dataset = conjunto de dados do gráfico
-  x = valor do eixo x do gráfico
-  y = valor do eixo y do gráfico
-  título = título do gráfico
-  subtitulo = subtitulo do texto
-  '''
+#   Dataset = conjunto de dados do gráfico
+#   x = valor do eixo x do gráfico
+#   y = valor do eixo y do gráfico
+#   título = título do gráfico
+#   subtitulo = subtitulo do texto
+#   '''
 
-  sns.set_theme(style="darkgrid", palette='Blues',font_scale=1.3)                    
-  plt.figure(figsize=(16,10))                                                           
+#   sns.set_theme(style="darkgrid", palette='Blues',font_scale=1.3)                    
+#   plt.figure(figsize=(16,10))                                                           
 
-  ax = sns.boxplot(y= y, x= x, data= dataset,color='#4171EF')                                           
-  ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, p: format(int(x), ',').replace(',','.')))                
+#   ax = sns.boxplot(y= y, x= x, data= dataset,color='#4171EF')                                           
+#   ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, p: format(int(x), ',').replace(',','.')))                
 
 
-  plt.ylim(0,max(dataset[y])*1.1)                                               #Definir o limite do eixo y
-  plt.xlabel(None)                                                                     
-  plt.ylabel(None)                                                                    
+#   plt.ylim(0,max(dataset[y])*1.1)                                               #Definir o limite do eixo y
+#   plt.xlabel(None)                                                                     
+#   plt.ylabel(None)                                                                    
 
-  ax.set_title(titulo+"\n",size=20,loc='left',weight='bold')
-  ax.text(s=subtitulo,x=-0.5,y=max(dataset[y])*1.11,fontsize=18, ha='left',color='gray')  
+#   ax.set_title(titulo+"\n",size=20,loc='left',weight='bold')
+#   ax.text(s=subtitulo,x=-0.5,y=max(dataset[y])*1.11,fontsize=18, ha='left',color='gray')  
   
-  gera_box_plot(alunos_graduacao_acervo_circulante,'ano','quantidade','Distribuição dos empréstimos mensais', 'Realizados pelos alunos de graduação no acervo circulante')
+#   gera_box_plot(alunos_graduacao_acervo_circulante,'ano','quantidade','Distribuição dos empréstimos mensais', 'Realizados pelos alunos de graduação no acervo circulante')
   
   #Pós Graduação
 
   
-alunos_pos_graduacao = complete_data.query('tipo_vinculo_usuario == "ALUNO DE PÓS-GRADUAÇÃO"')
-alunos_pos_graduacao.colecao.value_counts()
+# alunos_pos_graduacao = complete_data.query('tipo_vinculo_usuario == "ALUNO DE PÓS-GRADUAÇÃO"')
+# alunos_pos_graduacao.colecao.value_counts()
 
 
-alunos_pos_graduacao_acervo_circulante = alunos_pos_graduacao.query('colecao == "Acervo Circulante"')
-alunos_pos_graduacao_acervo_circulante = pd.DataFrame(alunos_pos_graduacao_acervo_circulante)
-alunos_pos_graduacao_acervo_circulante['data_emprestimo'] = pd.to_datetime(alunos_pos_graduacao_acervo_circulante['data_emprestimo'])
-alunos_pos_graduacao_acervo_circulante['ano'] = alunos_pos_graduacao_acervo_circulante['data_emprestimo'].dt.year
-alunos_pos_graduacao_acervo_circulante['mes'] = alunos_pos_graduacao_acervo_circulante['data_emprestimo'].dt.month
-alunos_pos_graduacao_acervo_circulante = alunos_pos_graduacao_acervo_circulante.loc[:,['ano','mes']]
-alunos_pos_graduacao_acervo_circulante = alunos_pos_graduacao_acervo_circulante.value_counts().to_frame('quantidade').reset_index()
-# alunos_pos_graduacao_acervo_circulante
+# alunos_pos_graduacao_acervo_circulante = alunos_pos_graduacao.query('colecao == "Acervo Circulante"')
+# alunos_pos_graduacao_acervo_circulante = pd.DataFrame(alunos_pos_graduacao_acervo_circulante)
+# alunos_pos_graduacao_acervo_circulante['data_emprestimo'] = pd.to_datetime(alunos_pos_graduacao_acervo_circulante['data_emprestimo'])
+# alunos_pos_graduacao_acervo_circulante['ano'] = alunos_pos_graduacao_acervo_circulante['data_emprestimo'].dt.year
+# alunos_pos_graduacao_acervo_circulante['mes'] = alunos_pos_graduacao_acervo_circulante['data_emprestimo'].dt.month
+# alunos_pos_graduacao_acervo_circulante = alunos_pos_graduacao_acervo_circulante.loc[:,['ano','mes']]
+# alunos_pos_graduacao_acervo_circulante = alunos_pos_graduacao_acervo_circulante.value_counts().to_frame('quantidade').reset_index()
+# # alunos_pos_graduacao_acervo_circulante
 
-gera_box_plot(alunos_pos_graduacao_acervo_circulante,'ano','quantidade','Distribuição dos empréstimos mensais', 'Realizados pelos alunos de pós graduação no acervo circulante')
+# gera_box_plot(alunos_pos_graduacao_acervo_circulante,'ano','quantidade','Distribuição dos empréstimos mensais', 'Realizados pelos alunos de pós graduação no acervo circulante')
+
+###DIA 6 ###
+
+# calcular a quantidade de empréstimos realizados entre 2015 e 2020 
+#por cada curso de graduação que passará pela avaliação.
+# Biblioteconomia
+# Ciências sociais
+# Comunicação social
+# Direito
+# Filosofia
+# Pedagogia
+
+matricula_alunos_plan = 'matricula_alunos.xlsx'
+
+cadastro_usuarios_json = "https://raw.githubusercontent.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/main/Dia_6-Novos_dados_novas_analises/Datasets/cadastro_alunos.json?utm_medium=email&_hsenc=p2ANqtz-9LbQ_ZLKK4VfdCieRRAGTcKjuzY2tltzcbNN96naXXOE1N7sR2YOrWFZufEs7EIfYn5Shkt8o1AhrPjF9wa_cSNAEMWQ&_hsmi=270881120&utm_content=270881120&utm_source=hs_automation"
+
+matricula_alunos_excel = pd.ExcelFile(matricula_alunos_plan)
+numero_de_abas = len(matricula_alunos_excel.sheet_names)
+matricula_alunos_sheet_names = matricula_alunos_excel.sheet_names
+
+matricula_alunos_ate_2010 = pd.read_excel(matricula_alunos_plan, sheet_name=matricula_alunos_sheet_names[0],skiprows=1)
+matricula_alunos_apos_2010 = pd.read_excel(matricula_alunos_plan, sheet_name=matricula_alunos_sheet_names[1],skiprows=1)
+
+matricula_alunos_ate_2010.columns = ['matricula_ou_siape','tipo_vinculo_usuario','curso']
+matricula_alunos_apos_2010.columns = ['matricula_ou_siape','tipo_vinculo_usuario','curso']
+# matricula_alunos_ate_2010.info()
+
+cadastro_usuarios_excel = pd.concat([matricula_alunos_ate_2010,matricula_alunos_apos_2010],ignore_index=True)
+cadastro_usuarios_excel.matricula_ou_siape = cadastro_usuarios_excel.matricula_ou_siape.astype('string')
+# cadastro_usuarios_excel.info()
+
+cadastro_usuarios = pd.read_json(cadastro_usuarios_json)
+
+cadastro_usuarios_graduacao_json = pd.read_json(cadastro_usuarios.registros[0])
+cadastro_usuarios_graduacao_json.matricula_ou_siape = cadastro_usuarios_graduacao_json.matricula_ou_siape.astype('float')
+cadastro_usuarios_graduacao_json.matricula_ou_siape = cadastro_usuarios_graduacao_json.matricula_ou_siape.astype('string')
      
+# cadastro_usuarios_graduacao_json.info()
+
+cadastro_usuarios_cursos = pd.concat([cadastro_usuarios_excel,cadastro_usuarios_graduacao_json],ignore_index=True)
+
+
+matricula_data_de_emprestimo = complete_data.query("tipo_vinculo_usuario == 'ALUNO DE GRADUAÇÃO'")
+matricula_data_de_emprestimo = matricula_data_de_emprestimo.loc[:,['matricula_ou_siape','data_emprestimo']]
+matricula_data_de_emprestimo = matricula_data_de_emprestimo.query('data_emprestimo > 2015')
+matricula_data_de_emprestimo = matricula_data_de_emprestimo.reset_index(drop=True)
+matricula_data_de_emprestimo
+
+matricula_data_de_emprestimo.isna().sum()
+matricula_data_de_emprestimo = matricula_data_de_emprestimo.dropna()
+
+cursos = ['BIBLIOTECONOMIA','CIÊNCIAS SOCIAIS','COMUNICAÇÃO SOCIAL','DIREITO','FILOSOFIA','PEDAGOGIA']
+
+cadastro_usuarios_cursos_selecionados = cadastro_usuarios_cursos.query("curso == ['BIBLIOTECONOMIA','CIÊNCIAS SOCIAIS','COMUNICAÇÃO SOCIAL','DIREITO','FILOSOFIA','PEDAGOGIA']")
+# cadastro_usuarios_cursos_selecionados
+
+
+cadastro_usuarios_cursos_selecionados = matricula_data_de_emprestimo.merge(cadastro_usuarios_cursos_selecionados)
+# cadastro_usuarios_cursos_selecionados
+
+cadastro_usuarios_cursos_selecionados.data_emprestimo = cadastro_usuarios_cursos_selecionados.data_emprestimo.dt.year
+
+
+emprestimos_cursos_selecionados = cadastro_usuarios_cursos_selecionados.iloc[:,[1,3]].value_counts().reset_index()
+emprestimos_cursos_selecionados.columns = ['ANO','CURSO','QUANTIDADE_EMPRESTIMOS']
+emprestimos_cursos_selecionados
+     
+emprestimos_tipo_usuario_curso_pivot = emprestimos_cursos_selecionados.pivot_table(
+        index = 'CURSO',
+        columns = 'ANO',
+        values = 'QUANTIDADE_EMPRESTIMOS',
+        fill_value = '-',
+        aggfunc= sum,
+        margins = True,
+        margins_name = 'TOTAL',
+)
+emprestimos_tipo_usuario_curso_pivot

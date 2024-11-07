@@ -377,7 +377,7 @@ cadastro_usuarios_cursos_selecionados.data_emprestimo = cadastro_usuarios_cursos
 
 emprestimos_cursos_selecionados = cadastro_usuarios_cursos_selecionados.iloc[:,[1,3]].value_counts().reset_index()
 emprestimos_cursos_selecionados.columns = ['ANO','CURSO','QUANTIDADE_EMPRESTIMOS']
-emprestimos_cursos_selecionados
+# emprestimos_cursos_selecionados
      
 emprestimos_tipo_usuario_curso_pivot = emprestimos_cursos_selecionados.pivot_table(
         index = 'CURSO',
@@ -388,4 +388,119 @@ emprestimos_tipo_usuario_curso_pivot = emprestimos_cursos_selecionados.pivot_tab
         margins = True,
         margins_name = 'TOTAL',
 )
-emprestimos_tipo_usuario_curso_pivot
+# emprestimos_tipo_usuario_curso_pivot
+
+###DIA 7 ###
+
+#diferença percentual de empréstimos realizados 
+#nos últimos anos (2017, 2018, 2019) para cada curso.
+cadastro_usuarios_pos_graduacao_json = pd.read_json(cadastro_usuarios.registros[1])
+cadastro_usuarios_pos_graduacao_json.matricula_ou_siape = cadastro_usuarios_pos_graduacao_json.matricula_ou_siape.astype('float')
+cadastro_usuarios_pos_graduacao_json.matricula_ou_siape = cadastro_usuarios_pos_graduacao_json.matricula_ou_siape.astype('string')
+    
+cadastro_usuarios_pos_graduacao_json.info()
+cadastro_usuarios_cursos_pos = pd.concat([cadastro_usuarios_excel,cadastro_usuarios_pos_graduacao_json],ignore_index=True)
+
+
+matricula_data_de_emprestimo_pos = complete_data.query("tipo_vinculo_usuario == 'ALUNO DE PÓS-GRADUAÇÃO'")
+matricula_data_de_emprestimo_pos = matricula_data_de_emprestimo_pos.loc[:,['matricula_ou_siape','data_emprestimo']]
+matricula_data_de_emprestimo_pos = matricula_data_de_emprestimo_pos.query('data_emprestimo > 2017')
+matricula_data_de_emprestimo_pos = matricula_data_de_emprestimo_pos.reset_index(drop=True)
+matricula_data_de_emprestimo_pos
+
+matricula_data_de_emprestimo_pos.isna().sum()
+matricula_data_de_emprestimo_pos = matricula_data_de_emprestimo_pos.dropna()
+
+emprestimos_pos_graduacao_desde_2017 = matricula_data_de_emprestimo_pos.merge(cadastro_usuarios_cursos_pos)
+emprestimos_pos_graduacao_desde_2017
+
+
+emprestimos_pos_graduacao_desde_2017.data_emprestimo = emprestimos_pos_graduacao_desde_2017.data_emprestimo.dt.year
+
+
+emprestimos_pos_graduacao_desde_2017 = emprestimos_pos_graduacao_desde_2017.iloc[:,[1,3]].value_counts().reset_index()
+emprestimos_pos_graduacao_desde_2017.columns = ['ANO','CURSO','QUANTIDADE_EMPRESTIMOS']
+emprestimos_pos_graduacao_desde_2017
+# emprestimos_cursos_selecionados
+     
+emprestimos_pos_graduacao_e_curso_pivot = emprestimos_pos_graduacao_desde_2017.pivot_table(
+        index = 'CURSO',
+        columns = 'ANO',
+        values = 'QUANTIDADE_EMPRESTIMOS'
+)
+# emprestimos_pos_graduacao_e_curso_pivot
+
+previsao_2022 = "https://raw.githubusercontent.com/FranciscoFoz/7_Days_of_Code_Alura-Python-Pandas/refs/heads/main/Dia_7-Apresentando_resultados_em_HTML/Dataset/previsao"
+
+previsao_2022_df = pd.read_table(previsao_2022)
+
+previsao_2022_df = previsao_2022_df['curso previsao_2022'].str.split(' ',expand=True)
+
+#criar uma tabela com as diferenças percentuais de 
+#empréstimos entre 2017-2018, 2018-2019, 2019-2022.
+
+previsao_2022_df.index = emprestimos_pos_graduacao_e_curso_pivot.index
+emprestimos_pos_graduacao_e_curso_pivot['2022'] = previsao_2022_df.iloc[:,1]
+emprestimos_pos_graduacao_e_curso_pivot.info()
+
+
+year_cols = [col for col in emprestimos_pos_graduacao_e_curso_pivot.columns]
+emprestimos_pos_graduacao_e_curso_pivot[year_cols] = emprestimos_pos_graduacao_e_curso_pivot[year_cols].astype(int)  
+
+def diferenca_percentual_ano_anterior(x,y):
+  return round(((x / y * 100) - 100),2)
+
+emprestimos_pos_graduacao_e_curso_pivot.iloc[:,0]
+percentual_2018 = diferenca_percentual_ano_anterior(emprestimos_pos_graduacao_e_curso_pivot.iloc[:,1],emprestimos_pos_graduacao_e_curso_pivot.iloc[:,0])
+percentual_2019 = diferenca_percentual_ano_anterior(emprestimos_pos_graduacao_e_curso_pivot.iloc[:,2],emprestimos_pos_graduacao_e_curso_pivot.iloc[:,1])
+percentual_2022 = diferenca_percentual_ano_anterior(emprestimos_pos_graduacao_e_curso_pivot.iloc[:,3],emprestimos_pos_graduacao_e_curso_pivot.iloc[:,2])
+
+percentual = pd.DataFrame({'2018':percentual_2018,
+                           '2019':percentual_2019,
+                           '2022':percentual_2022})
+
+
+percentual.reset_index(inplace=True)
+percentual.columns = percentual.columns.str.capitalize()
+percentual.Curso = percentual.Curso.str.capitalize()
+
+percentual.style
+
+th_props = [
+  ('font-size', '1.4rem'),
+  ('text-align', 'center'),
+  ('font-weight', 'bold'),
+  ('color', 'whitesmoke'),
+  ('background-color', '#001692'),
+  ('border-radius', '0.25rem'),
+  ('box-shadow','0 0 1rem gray')
+  ]
+
+td_props = [
+  ('font-size', '1rem'),
+  ('padding','0.5rem'),
+  ('text-align', 'left'),
+  ('font-weight', 'bold'),
+  ('border-bottom','0.1rem solid lightgray')
+  ]
+
+styles = [
+  dict(selector="th", props=th_props),
+  dict(selector="td", props=td_props)
+  ]
+
+#ajuste para versão mais recente do pandas
+
+# percentual.style.text_gradient(cmap='RdYlGn', low=1, axis=1, vmax=0.1, vmin=0)\
+#     .format('{:.2f} %', subset=['2018', '2019', '2022'])\
+#     .hide(axis="index")\  
+#     .set_table_styles(styles)\
+#     .to_html('teste.html', doctype_html=True,
+#              table_attributes='ALIGN=LEFT WIDTH=50% CELLSPACING = 5')
+
+percentual.style.text_gradient(cmap='RdYlGn',low=1, axis=1,vmax=0.1,vmin=0)\
+                              .format('{:.2f} %',subset=['2018','2019','2022'])\
+                              .hide(axis="index")\
+                              .set_table_styles(styles)\
+                              .to_html('teste.html',doctype_html =True,
+                                       table_attributes='ALIGN=LEFT WIDTH=50% CELLSPACING = 5')

@@ -113,3 +113,29 @@ Essa análise pode ser útil para entender como os alunos de graduação e pós-
   ...
 - Criar visualizações para apresentar os resultados de forma clara e eficaz
 - Integrar os resultados com outras análises para obter uma visão mais completa dos dados.
+
+**Dia 7: Análise de Dados de Empréstimos**
+
+**Resumo**
+
+Neste dia, realizamos uma análise de dados de empréstimos de livros em uma biblioteca universitária. Os dados incluem informações sobre os cursos dos usuários, as datas de empréstimo e os títulos dos livros.
+
+**Objetivos**
+
+- Analisar a diferença percentual de empréstimos realizados entre os anos de 2017, 2018, 2019 e 2022 para cada curso.
+- Criar uma tabela com as diferenças percentuais de empréstimos entre esses anos.
+- Visualizar os resultados em um arquivo HTML.
+
+**Etapa 1: Preparação dos Dados**
+
+- Carregamos os dados de empréstimos e informações sobre os usuários.
+- Tratamos os dados para remover valores ausentes e converter as datas de empréstimo para o formato de ano.
+- Unimos as tabelas de empréstimos e usuários para obter informações sobre os cursos dos usuários.
+
+**Etapa 2: Análise de Dados**
+
+- Criamos uma tabela pivot para calcular a quantidade de empréstimos por curso e ano.
+- Calculamos as diferenças percentuais de empréstimos entre os anos de 2017, 2018, 2019 e 2022.
+- Criamos uma tabela com as diferenças percentuais de empréstimos.
+
+![alt text](image-4.png)
